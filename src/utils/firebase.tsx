@@ -1,5 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAHsuCrgGGjpixr7SLZhoZTjZ0_ouOk9-Y',
@@ -14,4 +21,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const analytics = getAnalytics(firebaseApp);
+const provider: GoogleAuthProvider = new GoogleAuthProvider();
+
+provider.setCustomParameters({ prompt: 'select_acc' });
 export default firebaseApp;
