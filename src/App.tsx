@@ -1,36 +1,26 @@
 import React from 'react';
-import Category from './models/category';
-import Categories from './components/category_card/categories';
+import Home from './routes/home/home_route';
+import { Route, Routes } from 'react-router-dom';
+import NavigationBar from './components/navigation_bar/navigation';
+
+const Shop = () => {
+  return <div>Hey im a shop</div>;
+};
+
+const Store = () => {
+  return <div>Hey im a store</div>;
+};
 
 const App = () => {
-  const categories: Category[] = [
-    {
-      id: 1,
-      title: 'Hats',
-      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-    },
-    {
-      id: 2,
-      title: 'Jackets',
-      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-    },
-    {
-      id: 3,
-      title: 'Sneakers',
-      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-    },
-    {
-      id: 4,
-      title: "Women's",
-      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-    },
-    {
-      id: 5,
-      title: "Men's",
-      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-    },
-  ];
-  return <Categories categories={categories} />;
+  return (
+    <Routes>
+      <Route path='/' element={<NavigationBar />}>
+        <Route index element={<Home />} />
+        <Route path='shop' element={<Shop />} />
+        <Route path='/shop/store' element={<Store />} />
+      </Route>
+    </Routes>
+  );
 };
 
 export default App;
