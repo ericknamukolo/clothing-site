@@ -1,12 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signInWithRedirect,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAHsuCrgGGjpixr7SLZhoZTjZ0_ouOk9-Y',
@@ -19,9 +14,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-const analytics = getAnalytics(firebaseApp);
-const provider: GoogleAuthProvider = new GoogleAuthProvider();
-
-provider.setCustomParameters({ prompt: 'select_acc' });
-export default firebaseApp;
+initializeApp(firebaseConfig);
+export const auth = getAuth();
+export const db = getFirestore();
+export const document = doc;
+export const setDocument = setDoc;
+export const signInWithGooglePopup = () =>
+  signInWithPopup(
+    auth,
+    new GoogleAuthProvider().setCustomParameters({ prompt: 'select_account' })
+  );

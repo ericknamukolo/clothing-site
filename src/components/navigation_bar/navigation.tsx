@@ -20,7 +20,7 @@ const NavigationBar: React.FC = (props) => {
         <div className='nav-links-container'>
           {links.map((link) => {
             return (
-              <Link className='nav-link' to={link.path}>
+              <Link className='nav-link' to={link.path} key={link.path}>
                 {link.title}
               </Link>
             );
