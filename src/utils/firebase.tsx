@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithRedirect,
+} from 'firebase/auth';
 
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -22,6 +27,11 @@ export const setDocument = setDoc;
 export const getDocument = getDoc;
 export const signInWithGooglePopup = () =>
   signInWithPopup(
+    auth,
+    new GoogleAuthProvider().setCustomParameters({ prompt: 'select_account' })
+  );
+export const signInwithGoogle = () =>
+  signInWithRedirect(
     auth,
     new GoogleAuthProvider().setCustomParameters({ prompt: 'select_account' })
   );

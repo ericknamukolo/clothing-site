@@ -5,7 +5,7 @@ const SignIn: React.FC = (props) => {
   return (
     <Fragment>
       <h1>Sign In page</h1>
-      <button onClick={new Auth().authGoogleUser}>Sign in with google</button>
+      <button onClick={new Auth().authWithRedirect}>Sign in with google</button>
     </Fragment>
   );
 };
