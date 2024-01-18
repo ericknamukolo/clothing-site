@@ -3,6 +3,7 @@ import {
   db,
   document,
   setDocument,
+  getDocument,
 } from './../utils/firebase';
 import { UserCredential } from 'firebase/auth';
 
@@ -18,7 +19,9 @@ class Auth {
 
   static async createUserData(user: UserCredential) {
     const userDoc = document(db, 'users', user.user.uid);
-    console.log(userDoc);
+    var snapshot = await getDocument(userDoc);
+    if (snapshot.exists()) return;
+    console.log(snapshot.exists());
     await setDocument(userDoc, {
       id: user.user.uid,
       name: user.user.displayName,

@@ -19,6 +19,7 @@ export const auth = getAuth();
 export const db = getFirestore();
 export const document = doc;
 export const setDocument = setDoc;
+export const getDocument = getDoc;
 export const signInWithGooglePopup = () =>
   signInWithPopup(
     auth,
