@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import './navigation.scss';
-import LinkModel from '../../models/link';
+import LinkModel from '../../../models/link';
 
 const links: LinkModel[] = [
   { title: 'SHOP', path: '/shop' },

@@ -1,5 +1,5 @@
 import React from 'react';
-import Category from '../../models/category';
+import Category from '../../../models/category';
 import './category.scss';
 
 const CategoryCard: React.FC<{ category: Category }> = (props) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import Category from '../../models/category';
-import Categories from '../../components/category_card/categories';
+import Categories from '../../components/home/category_card/categories';
 
 const Home = () => {
   const categories: Category[] = [

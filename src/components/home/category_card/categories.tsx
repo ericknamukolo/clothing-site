@@ -1,5 +1,5 @@
 import React from 'react';
-import Category from '../../models/category';
+import Category from '../../../models/category';
 import CategoryCard from './category_card';
 import './category.scss';
 

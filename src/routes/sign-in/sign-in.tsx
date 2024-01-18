@@ -2,13 +2,13 @@ import React, { Fragment, useEffect } from 'react';
 import Auth from '../../providers/auth';
 import { getRedirectResult } from 'firebase/auth';
 import { auth } from '../../utils/firebase';
+import SignUpForm from '../../components/auth/sign-up-form';
 
 const SignIn: React.FC = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await getRedirectResult(auth);
-        console.log(res);
         if (res === null) return;
         await new Auth().createUserForRedirect(res!);
       } catch (error) {
@@ -25,6 +25,7 @@ const SignIn: React.FC = (props) => {
       <button onClick={new Auth().authWithRedirect}>
         Sign in with redirect
       </button>
+      <SignUpForm />
     </Fragment>
   );
 };
