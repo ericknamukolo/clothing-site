@@ -32,11 +32,23 @@ class Auth {
   }
   async authWithRedirect() {
     try {
-      const res: UserCredential = await signInwithGoogle();
-      Auth.createUserData(res);
+      await signInwithGoogle();
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async createUserForRedirect(user: UserCredential) {
+    const userDoc = document(db, 'users', user.user.uid);
+    var snapshot = await getDocument(userDoc);
+    if (snapshot.exists()) return;
+    await setDocument(userDoc, {
+      id: user.user.uid,
+      name: user.user.displayName,
+      email: user.user.email,
+      img: user.user.photoURL,
+      date: new Date(),
+    });
   }
 }
 
