@@ -36,6 +36,10 @@ const SignUpForm: React.FC = () => {
                 required
                 onChange={handleChange}
                 name={field.display}
+                value={
+                  fields.find((val) => val.display === field.display)?.input ??
+                  ''
+                }
               />
             </Fragment>
           );
