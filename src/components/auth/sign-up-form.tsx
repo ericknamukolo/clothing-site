@@ -9,6 +9,17 @@ const SignUpForm: React.FC = () => {
     { display: 'Confirm Password', type: 'password' },
   ] as TextField[]);
 
+  const handleSubmit = (event: any) => {
+    //event.preventDefauflt();
+    console.log(fields.find((field) => field.display === 'Password'));
+    if (
+      fields.find((field) => field.display === 'Password')?.input !==
+      fields.find((field) => field.display === 'Confirm Password')?.input
+    ) {
+      return alert('Passwords do not match');
+    }
+  };
+
   const handleChange = (event: any) => {
     setField((prevState) => {
       let updatedFields = [...prevState];
@@ -26,7 +37,7 @@ const SignUpForm: React.FC = () => {
   return (
     <div>
       <h1>Sign up with your email and password</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         {fields.map((field) => {
           return (
             <Fragment key={field.type + field.display}>
@@ -44,7 +55,7 @@ const SignUpForm: React.FC = () => {
             </Fragment>
           );
         })}
-        <button onClick={() => console.log(fields)}>Sign Up</button>
+        <button onClick={handleSubmit}>Sign Up</button>
       </form>
     </div>
   );
