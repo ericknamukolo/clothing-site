@@ -1,5 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import TextField from '../../models/field';
+import { createUserWithEmailAndPassword } from '../../utils/firebase';
+import { UserCredential } from 'firebase/auth';
+import Auth from '../../providers/auth';
 
 const SignUpForm: React.FC = () => {
   const [fields, setField] = useState([
@@ -9,14 +12,22 @@ const SignUpForm: React.FC = () => {
     { display: 'Confirm Password', type: 'password' },
   ] as TextField[]);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     //event.preventDefauflt();
-    console.log(fields.find((field) => field.display === 'Password'));
     if (
       fields.find((field) => field.display === 'Password')?.input !==
       fields.find((field) => field.display === 'Confirm Password')?.input
-    ) {
+    )
       return alert('Passwords do not match');
+
+    try {
+      const response: UserCredential = await createUserWithEmailAndPassword(
+        fields.find((field) => field.display === 'Email')!.input,
+        fields.find((field) => field.display === 'Password')!.input
+      );
+      await new Auth().createUserForRedirect(response);
+    } catch (e) {
+      alert(e);
     }
   };
 

@@ -5,7 +5,6 @@ import {
   setDocument,
   getDocument,
   signInwithGoogle,
-  createUserWithEmailAndPassword,
 } from './../utils/firebase';
 import { UserCredential } from 'firebase/auth';
 
