@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import './button.scss';
 
 enum BUTTON_TYPE {
+  normal,
   google,
   inverted,
 }
@@ -13,7 +14,7 @@ const Button: React.FC<{
 }> = (props) => {
   return (
     <button
-      className={`button-container ${props.type}`}
+      className={`button-container ${BUTTON_TYPE[props.type]}`}
       onClick={props.onClick}
     >
       {props.children}

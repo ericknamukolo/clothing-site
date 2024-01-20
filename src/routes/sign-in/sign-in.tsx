@@ -3,6 +3,8 @@ import Auth from '../../providers/auth';
 import { getRedirectResult } from 'firebase/auth';
 import { auth } from '../../utils/firebase';
 import SignUpForm from '../../components/auth/sign-up-form';
+import SignInForm from '../../components/auth/sign-in-form';
+import './sign-in.scss';
 
 const SignIn: React.FC = (props) => {
   useEffect(() => {
@@ -19,14 +21,11 @@ const SignIn: React.FC = (props) => {
     fetchData();
   }, []);
   return (
-    <Fragment>
-      <h1>Sign In page</h1>
-      <button onClick={new Auth().authGoogleUser}>Sign in with google</button>
-      <button onClick={new Auth().authWithRedirect}>
-        Sign in with redirect
-      </button>
+    <div className='auth-container'>
+      <SignInForm googleSignIn={new Auth().authGoogleUser} />
+      <div style={{ width: '200px' }}></div>
       <SignUpForm />
-    </Fragment>
+    </div>
   );
 };
 
