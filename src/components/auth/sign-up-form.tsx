@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import TextField from '../../models/field';
 import Auth from '../../providers/auth';
+import FormInput from './form-input';
 
 const SignUpForm: React.FC = () => {
   const [fields, setField] = useState([
@@ -42,19 +43,11 @@ const SignUpForm: React.FC = () => {
       <form onSubmit={handleSubmit}>
         {fields.map((field) => {
           return (
-            <Fragment key={field.type + field.display}>
-              <label>{field.display}</label>
-              <input
-                type={field.type}
-                required
-                onChange={handleChange}
-                name={field.display}
-                value={
-                  fields.find((val) => val.display === field.display)?.input ??
-                  ''
-                }
-              />
-            </Fragment>
+            <FormInput
+              field={field}
+              onChange={handleChange}
+              key={field.type + field.display}
+            />
           );
         })}
         <button onClick={handleSubmit}>Sign Up</button>
