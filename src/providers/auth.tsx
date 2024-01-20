@@ -1,3 +1,4 @@
+import { Logger } from 'sass';
 import {
   signInWithGooglePopup,
   db,
@@ -61,6 +62,10 @@ class Auth {
     displayName: string
   ) {
     try {
+      if (email === '' || password === '' || displayName === '') {
+        throw Error('All fields are required');
+      }
+      console.log('feifbeibf');
       const response: UserCredential = await createUser(email, password);
       console.log(response);
       await new Auth().createUserForRedirect(response, displayName);

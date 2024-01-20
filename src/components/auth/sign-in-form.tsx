@@ -8,7 +8,7 @@ const SignInForm: React.FC<{ googleSignIn: (event: any) => Promise<void> }> = (
   props
 ) => {
   const [fields, setField] = useState([
-    { display: 'Email', type: 'email' },
+    { display: 'Email', type: 'email', input: '' },
     { display: 'Password', type: 'password', input: '' },
   ] as TextField[]);
 

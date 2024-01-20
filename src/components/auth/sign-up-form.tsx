@@ -8,13 +8,13 @@ import { ButtonC, ButtonType } from '../button/button';
 const SignUpForm: React.FC = () => {
   const [fields, setField] = useState([
     { display: 'Display Name', type: 'text', input: '' },
-    { display: 'Email', type: 'email' },
+    { display: 'Email', type: 'email', input: '' },
     { display: 'Password', type: 'password', input: '' },
     { display: 'Confirm Password', type: 'password', input: '' },
   ] as TextField[]);
 
   const handleSubmit = async (event: any) => {
-    //event.preventDefauflt();
+    event.preventDefauflt();
     const { input: displayName } = fields[0];
     const { input: email } = fields[1];
     const { input: password } = fields[2];
@@ -42,7 +42,7 @@ const SignUpForm: React.FC = () => {
     <div className='sign-up-container'>
       <h2>Dont have an account?</h2>
       <span>Sign up with your email and password</span>
-      <form onSubmit={handleSubmit}>
+      <form>
         {fields.map((field) => {
           return (
             <FormInput
