@@ -1,7 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import TextField from '../../models/field';
-import { createUserWithEmailAndPassword } from '../../utils/firebase';
-import { UserCredential } from 'firebase/auth';
 import Auth from '../../providers/auth';
 
 const SignUpForm: React.FC = () => {
@@ -14,21 +12,13 @@ const SignUpForm: React.FC = () => {
 
   const handleSubmit = async (event: any) => {
     //event.preventDefauflt();
-    if (
-      fields.find((field) => field.display === 'Password')?.input !==
-      fields.find((field) => field.display === 'Confirm Password')?.input
-    )
-      return alert('Passwords do not match');
+    const { input: displayName } = fields[0];
+    const { input: email } = fields[1];
+    const { input: password } = fields[2];
+    const { input: confirmPassword } = fields[3];
+    if (password !== confirmPassword) return alert('Passwords do not match');
 
-    try {
-      const response: UserCredential = await createUserWithEmailAndPassword(
-        fields.find((field) => field.display === 'Email')!.input,
-        fields.find((field) => field.display === 'Password')!.input
-      );
-      await new Auth().createUserForRedirect(response);
-    } catch (e) {
-      alert(e);
-    }
+    await new Auth().createUserWithEmailAndPwd(email, password, displayName);
   };
 
   const handleChange = (event: any) => {
@@ -48,6 +38,7 @@ const SignUpForm: React.FC = () => {
   return (
     <div>
       <h1>Sign up with your email and password</h1>
+      <button onClick={handleSubmit}>Test Button</button>
       <form onSubmit={handleSubmit}>
         {fields.map((field) => {
           return (

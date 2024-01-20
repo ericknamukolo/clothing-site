@@ -5,6 +5,7 @@ import {
   setDocument,
   getDocument,
   signInwithGoogle,
+  createUser,
 } from './../utils/firebase';
 import { UserCredential } from 'firebase/auth';
 
@@ -38,17 +39,34 @@ class Auth {
     }
   }
 
-  async createUserForRedirect(user: UserCredential) {
+  async createUserForRedirect(
+    user: UserCredential,
+    displayName: string | null = null
+  ) {
     const userDoc = document(db, 'users', user.user.uid);
     var snapshot = await getDocument(userDoc);
     if (snapshot.exists()) return;
     await setDocument(userDoc, {
       id: user.user.uid,
-      name: user.user.displayName,
+      name: displayName ?? user.user.displayName,
       email: user.user.email,
       img: user.user.photoURL,
       date: new Date(),
     });
+  }
+
+  async createUserWithEmailAndPwd(
+    email: string,
+    password: string,
+    displayName: string
+  ) {
+    try {
+      const response: UserCredential = await createUser(email, password);
+      console.log(response);
+      await new Auth().createUserForRedirect(response, displayName);
+    } catch (e) {
+      alert(e);
+    }
   }
 }
 
