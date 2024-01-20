@@ -1,14 +1,16 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import TextField from '../../models/field';
 import Auth from '../../providers/auth';
 import FormInput from './form-input';
+import './form-input.scss';
+import { ButtonC, ButtonType } from '../button/button';
 
 const SignUpForm: React.FC = () => {
   const [fields, setField] = useState([
-    { display: 'Display Name', type: 'text' },
+    { display: 'Display Name', type: 'text', input: '' },
     { display: 'Email', type: 'email' },
-    { display: 'Password', type: 'password' },
-    { display: 'Confirm Password', type: 'password' },
+    { display: 'Password', type: 'password', input: '' },
+    { display: 'Confirm Password', type: 'password', input: '' },
   ] as TextField[]);
 
   const handleSubmit = async (event: any) => {
@@ -37,8 +39,9 @@ const SignUpForm: React.FC = () => {
     });
   };
   return (
-    <div>
-      <h1>Sign up with your email and password</h1>
+    <div className='sign-up-container'>
+      <h2>Dont have an account?</h2>
+      <span>Sign up with your email and password</span>
       <button onClick={handleSubmit}>Test Button</button>
       <form onSubmit={handleSubmit}>
         {fields.map((field) => {
@@ -50,7 +53,9 @@ const SignUpForm: React.FC = () => {
             />
           );
         })}
-        <button onClick={handleSubmit}>Sign Up</button>
+        <ButtonC onClick={handleSubmit} type={ButtonType.inverted}>
+          Sign Up
+        </ButtonC>
       </form>
     </div>
   );

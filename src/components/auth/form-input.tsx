@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '../../models/field';
-import './form-input.scss';
+import './sign-up-form.scss';
 
 const FormInput: React.FC<{
   field: TextField;
@@ -10,7 +10,7 @@ const FormInput: React.FC<{
     <div className='group'>
       <label
         className={`${
-          props.field.input.length ? 'shrink' : null
+          props.field.input !== '' ? 'shrink' : null
         } form-input-label`}
       >
         {props.field.display}
